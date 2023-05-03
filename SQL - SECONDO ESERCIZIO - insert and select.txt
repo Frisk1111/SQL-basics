@@ -1,0 +1,77 @@
+   
+
+#  | | INSERT AND SELECT | |
+
+ 
+ CREATE TABLE MEAL (
+  NAME VARCHAR(255),
+  PRICE DOUBLE,
+  CALORIES INT
+  );
+
+CREATE TABLE INGREDIENTS (
+  NAME VARCHAR(255),
+  LACTOSE_FREE BOOLEAN,
+  VEGETARIAN BOOLEAN,
+  VEGAN BOOLEAN,
+  GLUTEN_FREE BOOLEAN
+  );
+  
+  INSERT INTO MEAL(NAME, PRICE, CALORIES)
+  VALUES('Pesto Pasta', 15.30, 450);
+  
+  INSERT INTO MEAL(NAME, PRICE, CALORIES)
+  VALUES('Spaghetti all-assassina', 14.20, 500);
+  
+  INSERT INTO MEAL(NAME, PRICE, CALORIES)
+  VALUES('Hamburger', 8.50, 420);
+  
+  INSERT INTO MEAL(NAME, PRICE, CALORIES)
+  VALUES('Tiramisù', 16.00, 510);
+  
+  INSERT INTO INGRIDIENTS(NAME,LACTOSE_FREE, 
+  VEGETARIAN, VEGAN,
+  GLUTEN_FREE)
+  VALUES('Eggs', true, true, false, true);
+  
+  INSERT INTO INGREDIENTS(NAME,LACTOSE_FREE, 
+  VEGETARIAN, VEGAN,
+  GLUTEN_FREE)
+  VALUES('Bread', true, true, true, false);
+  
+  INSERT INTO INGREDIENTS(NAME,LACTOSE_FREE, 
+  VEGETARIAN, VEGAN,
+  GLUTEN_FREE)
+  VALUES('Beef Patty', true, false, false, true);
+  
+  INSERT INTO INGREDIENTS(NAME,LACTOSE_FREE, 
+  VEGETARIAN, VEGAN,
+  GLUTEN_FREE)
+  VALUES('Lettuce', true, true, true, true);
+  
+  INSERT INTO INGREDIENTS(LACTOSE_FREE, 
+  VEGETARIAN, VEGAN,
+  GLUTEN_FREE, NAME)
+  VALUES(false, true, false, true, 'Yoghurt');
+
+
+ #                | | parte di SELECT!! | |
+
+
+# così selezioni solo la colonna dei nomi!
+
+SELECT NAME FROM INGREDIENTS 
+
+
+# così seleziono sia la colonna dei nomi sia quella vegana! 
+
+SELECT NAME, VEGAN FROM INGREDIENTS
+
+# seleziono TUTTE le colone di ingredienti!
+
+SELECT * FROM INGREDIENTS
+
+# così seleziono sempre tutte le colonne ma in ordine alfabetico secondo il nome!
+
+SELECT * FROM INGREDIENTS
+ORDER BY NAME;
