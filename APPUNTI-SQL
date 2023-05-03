@@ -1,0 +1,184 @@
+
+|| CREAZIONI DI TABELLE E I TIPI DI VARIABILE ||
+
+
+" CREATE TABLE MEAL (  <-- ke-term: CREATE TABLE, serve per creare una nuova tabella! Dopo questo comando definiamo il NOME della tabella!
+  NAME VARCHAR(255),  
+  PRICE DOUBLE,
+  CALORIES INT
+  ); "
+  
+  Dopo il nome della tabella apriamo delle parentesi TONDE al cui interno definiamo le varie variabili e il loro tipo.
+  Definiamo PRIMA il nome delle variabili e POI il TIPO!
+  
+  - VARCHAR, sta per 'String', dopo questo tipo definiamo il massimo numero di bytes che il nome può contenere, lo standard è di 255:
+  - DOUBLE, numero decimale;
+  - INT, numero intero;
+  - BOOLEAN, true e false;
+  - TIMESTAMP, serve per poter usare le funzioni DATA_ADD e DATA_SUB
+  
+  
+  || COME INSERIRE I DATI IN UNA TABELLA ||
+  
+  " INSERT INTO MEAL(NAME, PRICE, CALORIES) <-- key term: INSERT INTO
+  VALUES('Pesto   Pasta', 15.35, 450);      <-- key term: VALUES
+  
+  INSERT INTO MEAL(NAME, PRICE, CALORIES) <-- key term: INSERT INTO
+  VALUES('Spaghetti   all' 'assassina', 14.20, 500); "  <-- key term: VALUES
+  
+  
+  ALLORA, per inserire i dati in una tabella scriviamo 'INSERT INTO' e dopo definiamo il NOME della tabella a cui vogliamo inserire i dati.
+  Apriamo poi delle parentesi tonde dove riscriviamo le VARIABILI definiti precedentemente nella tabella - subito sotto definiamo i loro
+  valori ('VALUES'), apriamo di nuovo delle parentesi tonde dove inseriremo i valori nello stesso ordine in cui li abbiamo scriti 
+  nelle parentesi tonde sopra!
+  
+  Pur mettendo in ordine diverso le varibili nelle parentesi dopo l'INSERT INTO le variabili verrebbero stampate nello stesso ordine in cui
+  erano definit dentro la tabella!!
+  
+  
+  
+  || SELECT, COME FUNZIONA ||
+  
+  Così selezionamo TUTTI  gli elementi dentro la tabella:
+  SELECT * FROM MEAL;
+  
+  
+  Così selezionamo solo UNA colonna dentro la tabella, in questo caso la colonna dei nomi:
+  SELECT NAME FROM MEAL;
+  
+  Così selezioniamo solo DUE colonne, in questo caso il nome e il prezzo:
+  SELECT NAME, PRICE FROM MEAL;
+  
+  
+  || WHERE, A COSA SERVE ||
+  
+  ES:
+  
+ 
+  SELECT * FROM MEAL
+  WHERE PRICE < 16;
+  ^
+  |
+  In questo caso stiamo selezionando TUTTE (*) LE TABELLE di Meal
+  MA DOVE (WHERE!!) il prezzo è MINORE  di 16!!
+  
+  SELECT * FROM MEAL
+  WHERE NAME = 'Pesto Pasta';
+  ^
+  |
+  In questo caso stiamo selezionando sempre TUTTE le colonne di Meal ma stiamo cercando dove
+  la tabella name corrisponde a 'Pesto Pasta'!
+  
+  Il WHERE può essere usato con tutte le colonne e con tutti i tipi, anche con i tipi Booleani!
+  
+  
+  || CREARE TABELLE BASATE SU QUELLE GIà ESISTENTI! ||
+  
+  
+  ES: 
+  
+  CREATE TABLE CHEAP_MEALS AS
+  SELECT * FROM MEAL WHERE PRICE < 15;
+  ^
+  |
+  Così creo una tabella COME (AS!) quella di meal DOVE (WHERE) il prezzo è minore i 15!
+  
+  Fondamentalmente per creare tabella basate su altrew che eistono già dopo aver definito il nome della tabella scriviamo 'AS'
+  e poi SELEZIONAMO la parte che ci interessa, in questo caso ci interessa SOLO le portate non cososte, perciò selezioneremo tutte colonne di
+  Meal dove il prezzo e minore di un tot.
+  
+  Creare nuove tabelle con solo colonne specifiche può essere utile per evitare una marea di SELECT lunghissimi
+  
+  Ci sono anche le VIEW che non occupano tutto questo spazio come le tabelle e la sintassi è fondamentalmente uguale come quella di prima!
+  
+  ES:
+  
+ CREATE VIEW EXPENSIVE_MEAL AS  <<-- key term: VIEW
+ SELECT * FROM MEAL WHERE PRICE>15;
+ 
+ Visto? L'unica cosa che cambia è che invece di scrivere 'CREATE TABLE' scriviamo 'CREATE VIEW'!
+
+  
+  
+  
+  || FUNZIONI NELLA PARTE SELECT! ||
+  
+  Ovviamente possono essere usate anche all'interno di una tabella!
+  ES: 
+  # metto come parametro 'BIRTHDAY_DATE' e 
+# definisco poi il tipo- 'TIMESTAMP' che mi permette di utilizzare
+# le funzioni di DATE
+CREATE TABLE BIRTHDAY(
+    BIRTHDAY_DATE TIMESTAMP
+    );
+    
+# inserisco nella tabella i valori
+   INSERT INTO BIRTHDAY(BIRTHDAY_DATE)
+
+# e do a quel parametro il valore di questa funzione!
+   VALUES (DATE_ADD(DATE_ADD(NOW(), INTERVAL 5 DAY), INTERVAL 6 MONTH));
+   
+   
+ DROP TABLE [NOME DELLA TABELLA]
+ ^
+ |
+ Per eliminare una tabella!
+  
+  
+ CONCAT(COLUMN1, COLUMN2) AS ALIAS_NAME -  ES: CONCAT('nome pietanza: ', NAME) AS CONCAT_FUNZIONE <-- questo 'AS' dopo la funzione serve per RINOMINARE LA COLONNA!!
+ ^
+ |
+ questo serve per concatenare delle stringhe a una colonna, una qualsiasi, funziona con tutte!
+ 
+
+ LOWER(COLUMN) ES: LOWER(NAME)
+  ^
+  |
+  Per scrivere tutto in minuscolo!
+  
+ UPPER(COLUMN)
+  ^
+  |
+  Per scrivere tutto in maiuscolo!
+  
+ TRIM(COLUMN) - ES: TRIM(NAME),
+ ^
+ |
+ Per eliminare i troppi spazi!
+ 
+ LENGTH(COLUMN) - ES: LEGTH(NAME),
+ ^
+ |
+ Per contare la lunghezza delle parole, in questo caso della colonna name!
+ 
+ SUBSTRING(COLUMN, START, LENGTH) - es: SUBSTRING(NAME, 3)
+ ^
+ |
+ Nel caso dell'esempio facciamo partire il prin della colonna NAME dal TERZO carattere in poi!
+ 
+ ROUND(COLUMN, DECIMAL_PLACES)
+ ^
+ |
+ Per arrontondare i numeri decimali!
+ Definiamo la colonna e poi il numero di posizioni decimali che deve avere, se mettiamo 1
+ i numeri saranno arrontondati fino a queloo spazio- es:; 16.66 diverrà 16.7!
+ 
+ DATE_ADD(COLUMN, INTERVAL EXPRESSION UNIT) <- UNIT: DAY, WEEK, MONTH
+ ^
+ |
+ Serve per aggiungere i giorni! 
+ Es: DATE_ADD(NOW(), INTERVAL 4 DAY)
+ In questo caso a partire da oggi AGGIUNGERà 4 GIorni!
+ Si possono concatenare più date:
+ DATE_ADD(DATE_ADD(NOW(), INTERVBAL 4 DAY), INTERVAL 6 MONTH) <- così non solo aggiungerà 4 giorni da oggi ma dopo quella operazione aggiungerà altri 6 mesi!
+ 
+ 
+ DATE_SUB(COLUMN, INTERVAL EXPRESSION UNIT)
+ ^
+ |
+ Stesso funzionamento di DATE_ADD ma questo li sottrae
+ 
+ FORMAT(COLUMN, FORMAT_STRING)
+ ^
+ |
+ Non ho capito a cosa serve!
