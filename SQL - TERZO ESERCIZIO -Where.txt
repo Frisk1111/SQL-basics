@@ -1,0 +1,117 @@
+# || Where  | |
+
+CREATE TABLE MEAL (
+  NAME VARCHAR(255),
+  PRICE DOUBLE,
+  CALORIES INT
+  );
+
+CREATE TABLE INGREDIENTS (
+  NAME VARCHAR(255),
+  LACTOSE_FREE BOOLEAN,
+  VEGETARIAN BOOLEAN,
+  VEGAN BOOLEAN,
+  GLUTEN_FREE BOOLEAN
+  );
+  
+  INSERT INTO MEAL(NAME, PRICE, CALORIES)
+  VALUES('Pesto Pasta', 15.30, 450);
+  
+  INSERT INTO MEAL(NAME, PRICE, CALORIES)
+  VALUES('Spaghetti all-assassina', 14.20, 500);
+  
+  INSERT INTO MEAL(NAME, PRICE, CALORIES)
+  VALUES('Hamburger', 8.50, 420);
+  
+  INSERT INTO MEAL(NAME, PRICE, CALORIES)
+  VALUES('Tiramisù', 16.00, 510);
+  
+  INSERT INTO INGRIDIENTS(NAME,LACTOSE_FREE, 
+  VEGETARIAN, VEGAN,
+  GLUTEN_FREE)
+  VALUES('Eggs', true, true, false, true);
+  
+  INSERT INTO INGREDIENTS(NAME,LACTOSE_FREE, 
+  VEGETARIAN, VEGAN,
+  GLUTEN_FREE)
+  VALUES('Bread', true, true, true, false);
+  
+  INSERT INTO INGREDIENTS(NAME,LACTOSE_FREE, 
+  VEGETARIAN, VEGAN,
+  GLUTEN_FREE)
+  VALUES('Beef Patty', true, false, false, true);
+  
+  INSERT INTO INGREDIENTS(NAME,LACTOSE_FREE, 
+  VEGETARIAN, VEGAN,
+  GLUTEN_FREE)
+  VALUES('Lettuce', true, true, true, true);
+  
+  INSERT INTO INGREDIENTS(LACTOSE_FREE, 
+  VEGETARIAN, VEGAN,
+  GLUTEN_FREE, NAME)
+  VALUES(false, true, false, true, 'Yoghurt');
+
+# -- SELECT PART --
+
+# così seleziono le portate che hanno il prezzo minore a 15
+
+SELECT * FROM MEAL
+WHERE PRICE < 15;
+
+
+# così seleziono dove la colonna 'vegetarian' è true!
+
+SELECT * FROM INGREDIENTS
+WHERE VEGETARIAN;
+
+
+# così seleziono le portate che hanno più di 500 calorie!
+
+SELECT * FROM MEAL
+WHERE CALORIES > 500;
+
+
+# questo era per selezionare il prezzo di tutte le portate comprese tra 15 e 16 però non va :(
+
+SELECT * FROM MEAL
+WHERE 15< PRICE <16;
+
+
+# per selezionare gli ingredienti che sobo senza lattosio E senza glutine!
+ 
+SELECT * FROM INGREDIENTS
+WHERE LACTOSE_FREE AND GLUTEN_FREE;
+
+
+# così seleziono tutte le portate che hanno un prezzo minore a 15 o che hanno più di 600 calorie
+
+SELECT * FROM MEAL
+WHERE PRICE < 15 OR CALORIES > 600;
+
+
+# così seleziono tutti gli ingredienti che sono vegani O senza glutine!
+
+SELECT * FROM INGREDIENTS
+WHERE VEGAN OR GLUTEN_FREE;
+
+
+# così seleziono tutte le portate che hanno come nome 'Pesto Pasta'
+
+SELECT * FROM MEAL
+  WHERE NAME ='Pesto Pasta';
+
+
+# così seleziono tutti gli ingredienti che NON sono senza lattosio!
+
+SELECT * FROM INGREDIENTS
+  WHERE !LACTOSE_FREE;
+
+
+# così seleziono tutte le portate che 
+# hanno un prezzo maggiore di 20 E hanno meno di 800 calorie
+# ovviamente non mi ritornerà niente visto che
+# nessuna delle portate che ho messo costa più di 20!
+
+SELECT * FROM MEAL
+  WHERE PRICE >20 AND CALORIES < 800;
+
