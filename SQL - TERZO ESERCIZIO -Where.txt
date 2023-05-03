@@ -71,10 +71,9 @@ SELECT * FROM MEAL
 WHERE CALORIES > 500;
 
 
-# questo era per selezionare il prezzo di tutte le portate comprese tra 15 e 16 però non va :(
-
+# questo era per selezionare il prezzo di tutte le portate comprese tra 15 e 16
 SELECT * FROM MEAL
-WHERE 15< PRICE <16;
+WHERE PRICE > 15 && PRICE < 16;
 
 
 # per selezionare gli ingredienti che sobo senza lattosio E senza glutine!
