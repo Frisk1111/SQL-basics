@@ -1,0 +1,119 @@
+# Date, Timestamp, Select Functions!
+
+# per semplicità ho fatto solo la tabella meal! 
+
+CREATE TABLE MEAL (
+  NAME VARCHAR(255),
+  PRICE DOUBLE,
+  CALORIES INT
+  );
+  
+  INSERT INTO MEAL(NAME, PRICE, CALORIES)
+  VALUES('Pesto   Pasta', 15.35, 450);
+  
+  INSERT INTO MEAL(NAME, PRICE, CALORIES)
+  VALUES('Spaghetti   all' 'assassina', 14.20, 500);
+  
+  INSERT INTO MEAL(NAME, PRICE, CALORIES)
+  VALUES('Hamburger   S', 8.52, 420);
+  
+  INSERT INTO MEAL(NAME, PRICE, CALORIES)
+  VALUES('Tiramisù', 16.66, 510);
+
+# questo è per il TIMESTAMP!!
+
+# metto come parametro 'BIRTHDAY_DATE' e 
+# definisco poi il tipo- 'TIMESTAMP' che mi permette di utilizzare
+# le funzioni di DATE
+CREATE TABLE BIRTHDAY(
+    BIRTHDAY_DATE TIMESTAMP
+    );
+    
+# inserisco nella tabella i valori
+   INSERT INTO BIRTHDAY(BIRTHDAY_DATE)
+
+# e do a quel parametro il valore di questa funzione!
+   VALUES (DATE_ADD(DATE_ADD(NOW(), INTERVAL 5 DAY), INTERVAL 6 MONTH));
+  
+  
+  
+
+# || parte select ||
+
+SELECT 
+
+# così elimino gli spazi in più dal nome!
+TRIM(NAME) AS name_of_meals_WITH_trim_function,
+
+# così faccio una colonna con tutti i nomi in minuscolo!
+LOWER(NAME) AS lowercase_names,
+
+# così faccio una colonna con tutti i nomi in maiuscolo!
+UPPER(NAME) AS UPPERCASE_NAMES,
+
+# così faccio una colonna dove conta i caratteri della colonna dei nomi!
+LENGTH(NAME) AS LUNGHEZZA_NOME_DELLE_PORTATE,
+
+# definisco prima la COLONNA e poi il numero dei caratteri che voglio
+# far rimanere, in questo caso lascerà dal TERZO carattere in poi!
+SUBSTRING(NAME, 3) AS FIRST_THREE_CHAR
+
+# per quanto ho capito l'ultima funziona PRIMA del 'FROM' NON deve avere la virgola!!
+# provando a metterla mi dava errore!
+
+#così richiamo la tabella a cui voglio dare tutte queste diverse colonne!
+FROM MEAL;
+
+#ALTRA PARTE SELECT
+
+SELECT 
+
+# questo serve per concatenare delle stringhe 
+# alla colonna- in questo caso nella colonna 'NAME'
+# prima del valore che gli abbiamo assegnato 
+# uscirà la scritta  'nome pietanza: '
+CONCAT('nome pietanza: ', NAME) 
+
+#questo 'AS' dopo la funzione serve per RINOMINARE LA COLONNA!!
+AS CONCAT_FUNZIONE,
+
+
+# serve per arrontondare i numeri
+# dopo la virgola dobbiamo specificare di quanti spazi decimali!
+# in questo caso arrontonderà fino al 2° spazio decimale
+# NB:se al secondo spazio è presento uno 0 allora non vera mostrato!!
+
+ROUND(PRICE,2) AS PREZZO_ARRONTONDATO,
+
+
+#serve per contare i giorni, 'NOW()' è una funzione che riporterà il giorno attuale
+# per aggiungere dobbiamo inserire DOPO la virgola 'INTERVAL' poi il numero
+# e poi l'unità di tempo (giorno, settima, mese, anno)!
+# anche se il giorno sarà maggiore di 1 dovremmo riportarlo come 'DAY'!
+
+DATE_ADD(NOW(), INTERVAL 4 DAY)
+AS DOPO_4_GIORNI_DA_OGGI,
+
+
+# questo invece serve per SOTTRARRE i giorni!
+# funziona come il metodo precedente!
+DATE_SUB(NOW(), INTERVAL 1 DAY) 
+AS IL_GIORNO_PRIMA_DI_OGGI,
+
+
+# non ho capito a cosa serve :,/
+FORMAT(NAME, 'okjboh')
+AS NON_HO_CAPITO
+FROM MEAL;
+
+
+#questo è per la seconda parte dell'esercizio!
+SELECT
+CONCAT('Il mio compleanno è il :', BIRTHDAY_DATE)
+from BIRTHDAY;
+
+
+
+
+
+
