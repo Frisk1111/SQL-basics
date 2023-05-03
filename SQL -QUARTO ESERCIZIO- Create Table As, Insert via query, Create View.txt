@@ -1,0 +1,93 @@
+# || Create Table As, Insert via query, Create View ||
+
+CREATE TABLE MEAL (
+  NAME VARCHAR(255),
+  PRICE DOUBLE,
+  CALORIES INT
+  );
+
+CREATE TABLE INGREDIENTS (
+  NAME VARCHAR(255),
+  LACTOSE_FREE BOOLEAN,
+  VEGETARIAN BOOLEAN,
+  VEGAN BOOLEAN,
+  GLUTEN_FREE BOOLEAN
+  );
+  
+  INSERT INTO MEAL(NAME, PRICE, CALORIES)
+  VALUES('Pesto Pasta', 15.30, 450);
+  
+  INSERT INTO MEAL(NAME, PRICE, CALORIES)
+  VALUES('Spaghetti all-assassina', 14.20, 500);
+  
+  INSERT INTO MEAL(NAME, PRICE, CALORIES)
+  VALUES('Hamburger', 8.50, 420);
+  
+  INSERT INTO MEAL(NAME, PRICE, CALORIES)
+  VALUES('Tiramisù', 16.00, 510);
+  
+  INSERT INTO INGRIDIENTS(NAME,LACTOSE_FREE, 
+  VEGETARIAN, VEGAN,
+  GLUTEN_FREE)
+  VALUES('Eggs', true, true, false, true);
+  
+  INSERT INTO INGREDIENTS(NAME,LACTOSE_FREE, 
+  VEGETARIAN, VEGAN,
+  GLUTEN_FREE)
+  VALUES('Bread', true, true, true, false);
+  
+  INSERT INTO INGREDIENTS(NAME,LACTOSE_FREE, 
+  VEGETARIAN, VEGAN,
+  GLUTEN_FREE)
+  VALUES('Beef Patty', true, false, false, true);
+  
+  INSERT INTO INGREDIENTS(NAME,LACTOSE_FREE, 
+  VEGETARIAN, VEGAN,
+  GLUTEN_FREE)
+  VALUES('Lettuce', true, true, true, true);
+  
+  INSERT INTO INGREDIENTS(LACTOSE_FREE, 
+  VEGETARIAN, VEGAN,
+  GLUTEN_FREE, NAME)
+  VALUES(false, true, false, true, 'Yoghurt');
+
+# || PARTE ESERCIZIO ||
+
+
+# così creo una tabella che prende TUTTE le portate (MEAL) dove il 
+# prezzo è MINORE  di 15!
+  
+  CREATE TABLE CHEAP_MEALS AS
+  SELECT * FROM MEAL WHERE PRICE < 15;
+
+# così creo una tabella vuota però basata da INGRIDIENTS!
+ 
+ CREATE TABLE VEGAN_INGREDIENTSAS 
+ SELECT * FROM INGREDIENTS WHERE FALSE;
+ 
+# così inserisco (INSERT INTO) nella tabella di prima
+# gli ingredienti vegani - quindi quelli che hanno come valore 'true'
+# e li prendo dalla tabella INGRIDIENTS 
+
+ INSERT INTO VEGAN_INGREDIENTS
+ SELECT * FROM INGREDIENTS WHERE VEGAN;
+
+# così creo una VIEW (è diverso da una tabella) dove seleziono le 
+# portate che hanno un prezzo superiore a 15
+
+ CREATE VIEW EXPENSIVE_MEAL AS 
+ SELECT * FROM MEAL WHERE PRICE>15;
+
+
+# così creo una VIEW dove seleziono gli ingredienti che hanno 
+# 'true' nella colonna 'LACTOSE_FREE' 
+
+ CREATE VIEW LACTOSE_FREE_INGREDIENTS AS
+ SELECT * FROM INGREDIENTS WHERE LACTOSE_FREE;
+
+
+# così creo una tabella basata su MEAL dove seleziono 
+# le portate che hanno più di 650 calorie 
+
+ CREATE TABLE HIGH_CALORIE_MEAL AS
+ SELECT * FROM MEAL WHERE CALORIES > 650;
