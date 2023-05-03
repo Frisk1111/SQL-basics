@@ -1,0 +1,22 @@
+#Esercizio fatto su 'http://sqlfiddle.com/':
+
+#prima parte: crea delle tabelle!
+
+#replicato l'esempio di Greg :
+
+CREATE TABLE MEAL (   
+  NAME VARCHAR(255),
+  PRICE DOUBLE,
+  CALORIES INT
+  );
+
+
+#tabella che ha chiesto di fare
+
+CREATE TABLE INGREDIENTS (  
+  NAME VARCHAR(255),
+  CONTAINS_LACTOSE BOOLEAN,
+  VEGETERIAN BOOLEAN,
+  VEGAN BOOLEAN,
+  GLUTEN_FREE BOOLEAN
+  );
