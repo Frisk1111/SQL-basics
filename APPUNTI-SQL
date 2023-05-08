@@ -182,3 +182,58 @@ CREATE TABLE BIRTHDAY(
  ^
  |
  Non ho capito a cosa serve!
+ 
+ 
+ 
+ || Grouping By, Count, Sum  ||
+ 
+ es:
+SELECT LOWER(NAME) AS LOWER_NAME, <- con questo AS stiamo rinominando il nome della colonna!
+COUNT(*) AS MEAL_ORDER FROM MEAL_ORDER <- con questo AS stiamo rinominando il nome della colonna!
+GROUP BY LOWER(NAME);
+^
+|
+key term : COUNT , GROUP BY
+Con 'COUNT' contiamo il numero delle righe, in questo caso stiamo contando le righe delle portat, quindi QUANTE VOLTE sono state ordinate!
+Con group raggruppiano il risultato di count secondon (by!!) i NOMI DELLE PORTATE
+Inoltre GROUP trova gli oggetti UNICI e unisce tutti gli altri a quello
+Per questo nel risultato di questa richiesta uscirà solo UNA colonna con il nome in lowercase della portata
+e accanto il numero delle volte in cui è stato ORDINATO!
+
+Quindi verrebbe una cosa simile come risultato:
+
+LOWER_NAME  | MEAL_ORDER  <<-- NOMI ALIAS DELLE COLONNE!
+cheesecake  | 3 
+hamburger   | 2  <<-- qua c'è il risultato di COUNT! Ha contato quante volte è stato ripetuto l'ordinE- 
+opasta      | 2          e con GROUP BY abbiamo raggruppato il risultato con i nomi delle portate!!
+
+
+
+SELECT LOWER(NAME) AS LOWER_NAME, <<-- selezioniamo sempre per il NOME!
+SUM(PRICE) AS TOT_REVENUE  <<-- SOMMIAMO il prezzo delle portate
+FROM MEAL_ORDER
+WHERE NAME LIKE '%s%'
+GROUP BY NAME;
+
+
+Key terms: SUM(), NAME LIKE'%s%'
+                   ^
+                   |
+     così cerchiamo le portate con contengono delle s!
+  se fosse stato 's%' stavamo cercando quelle che INIZIAVANO CON la s!
+  invece se fosse stato '%s' avremmo cercato quelle che FINIVANO con la s!
+  
+  
+La sintassi di SQL per la parte di SELECT sarebbe circa questo:
+
+SELECT */nome_colonna
+FUNZIONI <<-- come LOWER, UPPER, CONCAT, COUNT e SUM!
+FROM nome_tabella
+WHERE CLAUSE
+GROUP BY (ES: NAME)
+ORDER BY (PRICE DESC);
+^
+|
+se facciamo ORDER BY PRICE DESC ci usciranno le colonne ORDINATE in modo DECRESCENTE (dal più grande al più piccolo)
+Se scriviamo solo ORDER BY PRICE in automatico c'è lo metterà in ordine CRESCENTE(ASC!!)
+
