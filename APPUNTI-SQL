@@ -33,7 +33,7 @@
   nelle parentesi tonde sopra!
   
   Pur mettendo in ordine diverso le varibili nelle parentesi dopo l'INSERT INTO le variabili verrebbero stampate nello stesso ordine in cui
-  erano definit dentro la tabella!!
+  erano definiti dentro la tabella!!
   
   
   
@@ -98,6 +98,33 @@
  
  Visto? L'unica cosa che cambia è che invece di scrivere 'CREATE TABLE' scriviamo 'CREATE VIEW'!
 
+  
+  || OPERATORI LOGICI IN SQL ||
+  
+  Usati nella parte di SELECT funzionano come in javascript e in java!
+  Eccoli: 
+   
+  AND / &&  <-- con questo slash intendo che funzionano 
+  OR / ||       anche scritti nell'altro modo!!
+  !
+  = 
+  
+  es: SELECT * FROM INGREDIENTS
+  WHERE !VEGAN  <-- avrebbe funzionato anche 
+  ^                 scrivendo 'VEGAN = FALSE'  
+  |
+  così cercherà gli ingredienti che SONO FALSI! con il punto esclamativo 
+  puntiamo SEMPRE al significato CONTRARIO di quello che stiamo chiedendo
+  Se avessi scritto 'WHERE VEGAN' avrebbe dati i prodotti dove vegan risulta TRUE
+  
+  BOOLEANI in SQL: se vogliamo i valori veri non c'è bisogno di specificare '=true' 
+  perché ce li darà in AUTOMATICO! Se cerchiamo i valori falsi allora scriviamo con il '!' prima del nome
+  o con '= false'! Se vogliamo che appaiano prima i valori veri allora dopo il nomem dobbiamo scrivere 'DESC'
+  DESC li darà in ordien DECRESCENTE, nei booleani farà apparire in cima i valori VERI, con i double e gli int
+  li darà dal più grande al più piccoli, invece con le stringhe ritornerà l'alfabeto al contrario!
+  
+  ASC --> da le cose in ordine crescente, nei numeri darà dal più picccolo al più grande, nei booleani farà apparire 
+  prima i valori falsi e poi quelli veri, infine nei nomi li darà in ordine alfabetico!
   
   
   
