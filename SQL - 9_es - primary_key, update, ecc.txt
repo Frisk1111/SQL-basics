@@ -23,6 +23,11 @@ where ID = 1;
 #così vedo il nuovo valore
 select * from customer 
 
+#il delete funziona come il truncate
+#ma qua si può usare il where!
+DELETE FROM customer
+where ID = 3;
+
 # questo invece serve per elminare tutti i valori dentro la 
 # tabella 'customer'
 TRUNCATE customer;
