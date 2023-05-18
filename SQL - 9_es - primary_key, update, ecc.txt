@@ -1,0 +1,69 @@
+create table CUSTOMER(
+# così non può essere nullo e aumenta automaticamente!
+ID INT not null auto_increment,
+NAME VARCHAR(255),
+DOB DATE,
+FAVOURITE_MEAL_NAME VARCHAR(255),
+#assegno com e key l'id!
+primary KEY(ID)
+);
+
+#creo due nuovi clienti
+insert into customer (NAME, DOB, FAVOURITE_MEAL_NAME)
+values('Syd', DATE_SUB(now(), interval 16 YEAR), 'Butter'),
+('Yui', DATE_SUB(NOW(), interval 14 YEAR), 'Takoyaki'),
+('Sayori', DATE_ADD(DATE_SUB(DATE_SUB(now(), interval 15 YEAR), interval 12 day),interval 5 month), 'Cinnamon buns');
+
+#così modifico solo UNA riga della tabella, gli sto modificando 
+#la data di nascita!!
+update customer 
+set DOB = DATE_ADD(DATE_SUB(DATE_SUB(now(), interval 16 YEAR), interval 14 DAY),interval 5 month)
+where ID = 1;
+
+#così vedo il nuovo valore
+select * from customer 
+
+# questo invece serve per elminare tutti i valori dentro la 
+# tabella 'customer'
+TRUNCATE customer;
+
+
+# Look at the tables below and write which column(s) you think would make a good primary key.
+
+# - Question 1 :
+
+#CREATE TABLE Customers (
+# customer_id INT NOT NULL AUTO_INCREMENT,
+# first_name VARCHAR(255) NOT NULL,
+# last_name VARCHAR(255) NOT NULL,
+# email VARCHAR(255) NOT NULL,
+# PRIMARY KEY (customer_id) <-- l'id è un ottima key
+#);
+
+
+# - Question 2:
+
+#CREATE TABLE Products (
+# product_name VARCHAR(255) NOT NULL,
+# product_description VARCHAR(255) NOT NULL,
+# product_price DECIMAL(10, 2) NOT NULL,
+# product_quantity INT NOT NULL
+# );
+# ^
+# |
+# Qua sono un po' confusa, ma penso che sceglierei la descrizione
+
+#- Question 3: 
+# CREATE TABLE Orders (
+# order_id INT NOT NULL AUTO_INCREMENT, <-- sceglierei l'id
+# customer_id INT NOT NULL,
+# expected_arrival_time DATE
+# );
+
+# - Question 4:
+
+# CREATE TABLE Product_Orders ( 
+# order_id INT NOT NULL AUTO_INCREMENT, <-- sceglierei l'id
+# product_name VARCHAR(255) NOT NULL,
+# total_revenue DOUBLE
+# );

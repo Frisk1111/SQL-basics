@@ -1,0 +1,28 @@
+CREATE TABLE ingredient (
+	NAME VARCHAR(255),
+	CONTAINS_LACTOSE BOOLEAN,
+	VEGETARIAN BOOLEAN,
+	VEGAN BOOLEAN,
+	GLUTEN_FREE BOOLEAN,
+);
+
+#così impedisco di inserire 'doppioni' di ingredienti già presenti!
+ALTER TABLE ingredient
+ADD COSTRAINT UNIQUE(name);
+
+#così applico a TUTTA la colonna 'name' il fatto che 
+#NON deve essere nulla!!
+ALTER TABLE ingredient
+MODIFY NAME VARCHAR(255) NOT NULL;
+
+ALTER TABLE ingredient
+MODIFY CONTAINS_LACTOSE BOOLEAN NOT NULL;
+
+ALTER TABLE ingredient
+MODIFY VEGETARIAN BOOLEAN NOT NULL;
+
+ALTER TABLE ingredient
+MODIFY VEGAN BOOLEAN NOT NULL;
+
+ALTER TABLE ingredient
+MODIFY GLUTEN_FREE BOOLEAN NOT NULL;
