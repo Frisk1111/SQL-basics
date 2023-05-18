@@ -1,15 +1,4 @@
-1. Using the INGREDIENT and MEAL tables, write a query to return the name of all meals that contain garlic.
-
-2. Using the INGREDIENT and MEAL tables, write a query to return the number of meals with vegetarian ingredients.
-
-3. Using the INGREDIENT and MEAL tables, write a query to return the names of meals that have at least 1 gluten free ingredient and at least 1 vegan ingredient.
- 
-4. Using the INGREDIENT and MEAL tables, write a query to return the average number of ingredients per meal.
-
-5. Using the INGREDIENT and MEAL tables, write a query to return the names of meals that have more than 3 ingredients.
-
-Questo da fare PRIMA  dell'esercizio in se'!
-Così le aggiungo a ingredients e lo ridefinisco nel meal dandogli do un nuovo valore! 
+#ricreo la tabella meal con i valori che GREG aveva messo durante i video
 
 CREATE TABLE meal (
 	NAME VARCHAR(255),
@@ -38,18 +27,23 @@ INSERT INTO meal
 (NAME, PRICE, CALORIES)
 VALUES('Sushi Platter', 15.99, 700);
 
+#ricreo la tabella ingredienti
 CREATE TABLE ingredient (
 	NAME VARCHAR(255),
 	CONTAINS_LACTOSE BOOLEAN,
 	VEGETARIAN BOOLEAN,
 	VEGAN BOOLEAN,
-	GLUTEN_FREE BOOLEAN
-	
+	GLUTEN_FREE BOOLEAN	
 );
+
+#così non solo agigungo la colonna meal_id
+#ma la rendo collegata a quella della tabella meal !!
 
 ALTER TABLE INGREDIENTS
 ADD COLUMN MEAL_ID int REFERENCES MEAL(MEAL_ID);
 
+
+#aggiunto i nuovi ingredienti!
 INSERT INTO INGREDIENT (MEAL_ID, NAME, CONTAINS_LACTOSE, VEGETARIAN, VEGAN, GLUTEN_FREE)
 VALUES (1, 'Grilled Chicken', FALSE, FALSE, FALSE, TRUE);
 INSERT INTO INGREDIENT (MEAL_ID, NAME, CONTAINS_LACTOSE, VEGETARIAN, VEGAN, GLUTEN_FREE)
@@ -125,22 +119,24 @@ INSERT INTO INGREDIENT (MEAL_ID, NAME, CONTAINS_LACTOSE, VEGETARIAN, VEGAN, GLUT
 VALUES (6, 'Soy Sauce', FALSE, TRUE, TRUE, TRUE);
 
 
+#       ---------------------
+#       prima parte esercizio
+#       ---------------------
 
-#PARTE ESERCIZIO:
 #1.
 #così mi ritornano le portate che contengono l'aglio!
 select * from  meal m 
 inner join ingredient i on i.MEAL_ID  = m.MEAL_ID 
 where i.NAME  = 'garlic' ;
 
-#2 non l'ho capita fanculo bastardi di merda morite
+#2 non l'ho capita 
 SELECT * FROM MEAL M
 INNER JOIN INGREDIENTS I ON I.MEAL_ID = M.MEAL_ID
 COUNT(*)FROM M.MEAL_NAME
-WHERE I.VEGETARIAN; <-- si cista!
+WHERE I.VEGETARIAN; 
 
 #3.
-#così mi ritornarno le portate che hanno almeno 
+#così mi ritornano le portate che hanno almeno 
 #un ingrediente senza glunite e uno vegano-
 select 
 concat('portata: ', m.NAME ) as meals
@@ -153,7 +149,7 @@ group by m.NAME ;
 SELECT * FROM MEAL M
 INNER JOIN INGREDIENTS I ON I.MEAL_ID = M.MEAL_ID
 AVG(I)
-GROUP BY M.MEAL_NAME; <-- non lo so se sia giusto....
+GROUP BY M.MEAL_NAME; 
 
 #5
 #per trovare le portate con più di  3 ingredienti!!!
@@ -167,9 +163,9 @@ having num_of_ingredients > 3;
 
 
 
-#           ----------------
-#            seconda parte
-#           ----------------
+#         -----------------------
+#         seconda parte esercizio
+#         -----------------------
 
 
 
@@ -197,14 +193,7 @@ ALTER TABLE ORDER
 ADD CONSTRAINT PRIMARY KEY(CUSTOMER_ID);
 
 
-
-#INNER JOIN MANUALE:
-
-SELECT * FROM CUSTOMER C, ORDER O
-WHERE C.CUSTOMER_ID  = O.CUSTOMER_ID;
-
-#INNER JOIN NORMALE:
-
+#INNER JOIN
 SELECT * FROM ORDER O
 INNER JOIN CUSTOMER C ON C.CUSTOMER_ID  = O.CUSTOMER_ID;
 
@@ -235,13 +224,8 @@ ADD constraint PRIMARY KEY(PRODUCT_ID);
 ALTER TABLE INVENTORY
 ADD constraint PRIMARY KEY(PRODUCT_ID);
 
-#INNER JOIN MANUALE:
 
-SELECT * FROM PRODUCT P, INVENTORY I
-WHERE P.PRODCUT_ID = I.PRODUCT_ID;
-
-
-#INNER JOIN NORMALE:
+#INNER JOIN
 
 SELECT * FROM INVENTORY I
 INNER JOIN PRODUCT P ON P.PRODUCT_ID = I.PRODUCT_ID;
