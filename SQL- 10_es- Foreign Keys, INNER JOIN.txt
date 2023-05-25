@@ -129,11 +129,13 @@ select * from  meal m
 inner join ingredient i on i.MEAL_ID  = m.MEAL_ID 
 where i.NAME  = 'garlic' ;
 
-#2 non l'ho capita 
-SELECT * FROM MEAL M
-INNER JOIN INGREDIENTS I ON I.MEAL_ID = M.MEAL_ID
-COUNT(*)FROM M.MEAL_NAME
-WHERE I.VEGETARIAN; 
+#2  così conto le portate che hanno
+ # ingredienti vegetariani
+select count(distinct meal.meal_id) as MEAL_WITH_VEGATARIAN_INGREDIENTS
+from meal m
+inner join ingredient i  on m.MEAL_ID = i.MEAL_ID
+where i.vegetarian;
+
 
 #3.
 #così mi ritornano le portate che hanno almeno 
@@ -145,11 +147,15 @@ inner join ingredient i on i.MEAL_ID  = m.MEAL_ID
 where i.GLUTEN_FREE and i.VEGAN 
 group by m.NAME ;
 
-#4 non capita
-SELECT * FROM MEAL M
-INNER JOIN INGREDIENTS I ON I.MEAL_ID = M.MEAL_ID
-AVG(I)
-GROUP BY M.MEAL_NAME; 
+
+#4
+select avg(NUM_INGREDIENTS) as AVG_NUM_INGREDIENTS
+  from (
+  select meal.MEAL_ID, count(INGREDIENT.NAME) as NUM_INGREDIENTS
+  from meal m
+  inner join ingredient i on m.MEAL_ID = i.MEAL_ID
+  group by m.MEAL_ID
+  ) as COUNTING_QUERY;
 
 #5
 #per trovare le portate con più di  3 ingredienti!!!
